@@ -1,0 +1,75 @@
+:root{
+  --bg1: #0f172a;
+  --bg2: #0b1220;
+  --accent: #7c5cff;
+  --accent-2: #00e0b8;
+  --card: rgba(255,255,255,0.04);
+  --glass: rgba(255,255,255,0.03);
+  --muted: rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent), linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+.app{width:100%;max-width:920px}
+.app{position:relative;z-index:2}
+.app *{position:relative;z-index:2}
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;display:block}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{font-weight:800;letter-spacing:0.6px;font-size:18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.date{font-weight:500}
+.date{font-weight:500}
+.bg-label,.date{color:var(--muted);font-weight:500}
+.bg-label{font-size:12px;color:var(--muted);margin-right:4px}
+#bgSelect{appearance:none;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:#fff;font-weight:600}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px)}
+.modes{display:flex;gap:12px;margin-bottom:20px}
+.mode{padding:10px 18px;border-radius:12px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-weight:600}
+.mode.active{background:linear-gradient(90deg, rgba(124,92,255,0.14), rgba(0,224,184,0.06));color: #fff;box-shadow: 0 6px 18px rgba(12,18,32,0.6)}
+.pane{min-height:220px}
+.hidden{display:none}
+.big-display{font-size:48px;font-weight:800;letter-spacing:1px;text-align:center;padding:20px 0}
+.timer-controls,.stopwatch-controls{display:flex;flex-direction:column;gap:14px;align-items:center}
+.inputs{display:flex;gap:10px;align-items:center}
+.inputs label{font-size:13px;color:var(--muted);display:flex;flex-direction:column;align-items:center}
+.inputs input{width:72px;padding:10px;border-radius:10px;border:none;background:var(--glass);color:#fff;text-align:center;font-weight:700}
+.buttons{display:flex;gap:12px}
+.btn{padding:10px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 30px rgba(124,92,255,0.12)}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.laps{width:100%;max-height:140px;overflow:auto;margin-top:6px;border-top:1px dashed rgba(255,255,255,0.03);padding-top:8px}
+.lap{display:flex;justify-content:space-between;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:8px}
+.footer{color:var(--muted);text-align:center;margin-top:14px}
+
+@media (max-width:520px){
+  .big-display{font-size:36px}
+  .inputs input{width:56px}
+}
+
+/* focus / zoomed view */
+.card{transition:transform 420ms cubic-bezier(.2,.9,.2,1), box-shadow 420ms}
+.card.focus{transform:scale(1.08);box-shadow:0 40px 80px rgba(2,6,23,0.7)}
+.card.focus .modes,
+.card.focus .inputs,
+.card.focus .laps,
+.card.focus .footer,
+.card.focus .bg-label,
+.card.focus .custom-select{opacity:0;transform:translateY(18px);pointer-events:none}
+.card.focus .big-display{font-size:72px}
+.card.focus .buttons{gap:10px}
+.card.focus .btn{opacity:0;transform:translateY(12px);pointer-events:none}
+.card.focus .btn.keep-visible{opacity:1;transform:none;pointer-events:auto}
+
+/* small pulse when timer ends */
+.pulse{animation:pulse 1s ease-in-out 3}
+@keyframes pulse{from{transform:scale(1)}50%{transform:scale(1.02);filter:brightness(1.07)}to{transform:scale(1)}}

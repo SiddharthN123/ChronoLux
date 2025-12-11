@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Timer & Stopwatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="bgCanvas" aria-hidden="true"></canvas>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">ChronoLux</div>
+        <div class="date" id="date">—</div>
+      </header>
+
+      <main class="card">
+        <nav class="modes" role="tablist" aria-label="Timer or Stopwatch">
+          <button class="mode active" data-mode="timer" role="tab">Timer</button>
+          <button class="mode" data-mode="stopwatch" role="tab">Stopwatch</button>
+        </nav>
+
+        <section class="pane" id="timerPane">
+          <div class="big-display" id="timerDisplay">00:00:00</div>
+
+          <div class="timer-controls">
+            <div class="inputs">
+              <label>H <input type="number" id="th" min="0" max="99" value="0"></label>
+              <label>M <input type="number" id="tm" min="0" max="59" value="1"></label>
+              <label>S <input type="number" id="ts" min="0" max="59" value="0"></label>
+            </div>
+
+            <div class="buttons">
+              <button id="tStart" class="btn primary">Start</button>
+              <button id="tPause" class="btn" disabled>Pause</button>
+              <button id="tReset" class="btn" disabled>Reset</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="pane hidden" id="stopwatchPane">
+          <div class="big-display" id="swDisplay">00:00.00</div>
+
+          <div class="stopwatch-controls">
+            <div class="buttons">
+              <button id="sStart" class="btn primary">Start</button>
+              <button id="sPause" class="btn" disabled>Pause</button>
+              <button id="sReset" class="btn" disabled>Reset</button>
+            </div>
+            <div class="laps" id="laps"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">Made with care · Crafting tools for better lifestyle</footer>
+    </div>
+
+    <script src="bg.js" defer></script>
+    <script src="script.js"></script>
+  </body>
+</html>
